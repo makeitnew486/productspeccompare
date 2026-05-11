@@ -4,14 +4,7 @@ FBKR 영업의 고객 제안 시 자사 모델 스펙을 빠르게 확인하고,
 
 ## 사용
 
-| 버전 | URL |
-|---|---|
-| 안정판 (v1) | `index.html` |
-| 디자인 v2 | `v2.html` |
-
-GitHub Pages 활성화 시:
-- v1: `https://makeitnew486.github.io/productspeccompare/`
-- v2: `https://makeitnew486.github.io/productspeccompare/v2.html`
+URL: `https://makeitnew486.github.io/productspeccompare/`
 
 ## 데이터
 

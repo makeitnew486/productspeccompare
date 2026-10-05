@@ -228,9 +228,10 @@ html, body {
 .notice-bar .right {
   margin-left: auto; padding-left: 14px;
   border-left: 1px solid var(--warn-border);
-  font-size: 12px; opacity: 0.85;
+  font-size: 12px;   /* opacity 제거 — 읽는 글자는 회색 금지 (2026-10-05) */
   white-space: nowrap;
 }
+.notice-bar { word-break: keep-all; }   /* 한글 단어 중간 줄바꿈 금지 ("바 / 랍니다"), 2026-10-05 */
 
 /* ============================================================
    Filter rows (Notion: pill tabs — inactive ghost, active black)
@@ -820,7 +821,7 @@ html, body {
   <div class="notice-bar">
     <span class="dot">💡</span>
     <span><b>본 자료는 영업 참고용</b>이며, 제안서 작성 및 최종 견적 제출 전 반드시 각 제조사 공식 채널을 통해 스펙·가격을 재확인하시기 바랍니다.</span>
-    <span class="right">데이터 기준 2026-10-05 · 화면 갱신 2026-10-05 · 사양 변경 시 상이할 수 있음</span>
+    <span class="right">데이터 기준 2026-10-05 · 사양 변경 시 상이할 수 있음</span>
   </div>
 </header>
 

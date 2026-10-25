@@ -873,8 +873,8 @@ html, body {
 <div class="results-header">
   <div class="results-left">
     <div class="results-count">총 <b id="filter-count">0</b>개 제품 표시</div>
-    <label class="eol-toggle" title="단종된 구형 모델도 목록에 표시합니다 (옛 고객 기기 비교용)">
-      <input type="checkbox" id="show-eol"> 단종 포함 <span class="eol-note">(경쟁사는 「단종 추정」)</span>
+    <label class="eol-toggle" title="단종된 구형 모델을 목록에서 뺍니다 (검색할 때는 단종 모델도 나옵니다)">
+      <input type="checkbox" id="hide-eol"> 단종 제외 <span class="eol-note">(경쟁사는 「단종 추정」)</span>
     </label>
   </div>
   <select class="sort-select" id="sort-select">
@@ -1284,7 +1284,7 @@ const STATE = {
   sort: "brand",
   hideEmpty: false,
   onlyOverlap: true,   // 디폴트 ON — 모든 모델에 값 있는 항목만 표시
-  showEol: false,      // 디폴트 OFF — 단종 모델은 기본 숨김 (현행 제안 방해 방지)
+  hideEol: false,      // 디폴트 OFF — 단종 포함해서 표시 (2026-10-25 영업 요청). 검색 중엔 체크해도 단종 표시
 };
 
 function el(tag, attrs = {}, ...children) {
@@ -1387,7 +1387,7 @@ function modelMatchesSpeed(m) {
 function filteredModels() {
   const q = STATE.search.trim().toLowerCase();
   const list = PAYLOAD.models.filter((m) => {
-    if (!STATE.showEol && _eolAny(m)) return false;
+    if (STATE.hideEol && !q && _eolAny(m)) return false;
     if (STATE.brands.size > 0 && !STATE.brands.has(m.brand)) return false;
     if (STATE.types.size > 0 && !STATE.types.has(m.type)) return false;
     if (!modelMatchesSpeed(m)) return false;
@@ -1986,8 +1986,8 @@ document.getElementById("export-csv-btn").addEventListener("click", exportCompar
 document.getElementById("search").addEventListener("input", (e) => {
   STATE.search = e.target.value; renderCards();
 });
-document.getElementById("show-eol").addEventListener("change", (e) => {
-  STATE.showEol = e.target.checked;
+document.getElementById("hide-eol").addEventListener("change", (e) => {
+  STATE.hideEol = e.target.checked;
   renderCards();
 });
 document.getElementById("sort-select").addEventListener("change", (e) => {
